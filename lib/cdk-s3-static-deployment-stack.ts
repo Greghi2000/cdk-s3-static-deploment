@@ -19,7 +19,7 @@ export class StaticWebsiteStack extends cdk.Stack {
     const websiteBucket = new s3.Bucket(this, 'WebsiteBucket', {
       websiteIndexDocument: 'index.html',
       publicReadAccess: true,
-      removalPolicy: cdk.RemovalPolicy.DESTROY, // Not recommended for production
+      removalPolicy: cdk.RemovalPolicy.DESTROY,
     });
 
     // Create a certificate
