@@ -10,3 +10,4 @@ jobs:
           ls
           cd My-Portfolio
           cat index-home.html
+          cdk --version
