@@ -12,4 +12,4 @@ jobs:
           cat index-home.html
           cdk --version
           npm install
-          cdk synth --profile default
+          cdk synth
