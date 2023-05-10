@@ -11,3 +11,5 @@ jobs:
           cd My-Portfolio
           cat index-home.html
           cdk --version
+          npm install
+          cdk synth --profile default
