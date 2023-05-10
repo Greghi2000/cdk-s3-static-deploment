@@ -1,0 +1,13 @@
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: 'circleci/classic:latest'
+    steps:
+      - checkout: # - Responsable for cloning the repo
+          git:
+            url: https://github.com/SeanGordon01/My-Portfolio.git
+            path: ./website
+      - run: |
+          cd website
+          cat index-home.html

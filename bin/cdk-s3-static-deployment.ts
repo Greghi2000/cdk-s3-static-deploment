@@ -6,8 +6,8 @@ import { StaticWebsiteStack } from '../lib/cdk-s3-static-deployment-stack';
 const app = new cdk.App();
 new StaticWebsiteStack(app, 'StaticWebsiteStack', {
   env: {
-    account: process.env.CDK_DEFAULT_ACCOUNT,
-    region: process.env.CDK_DEFAULT_REGION,
+    account: process.env.AWS_ACCOUNT_NUMBER,
+    region: process.env.AWS_ACCOUNT_REGION,
   },
 });
 app.synth();
