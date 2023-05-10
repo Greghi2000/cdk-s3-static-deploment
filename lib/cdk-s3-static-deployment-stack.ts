@@ -12,8 +12,8 @@ export class StaticWebsiteStack extends cdk.Stack {
     super(scope, id, props);
 
     // Replace these values with your own
-    const domainName = 'example.com';
-    const subdomain = 'www';
+    // const domainName = 'example.com';
+    // const subdomain = 'www';
 
     // Create S3 bucket for website
     const websiteBucket = new s3.Bucket(this, 'WebsiteBucket', {
@@ -23,31 +23,31 @@ export class StaticWebsiteStack extends cdk.Stack {
     });
 
     // Create a certificate
-    const certificate = new acm.DnsValidatedCertificate(this, 'WebsiteCertificate', {
-      domainName: `${subdomain}.${domainName}`,
-      hostedZone: route53.HostedZone.fromLookup(this, 'HostedZone', { domainName }),
-      region: 'us-east-1', // CloudFront requires ACM certificates to be in the us-east-1 region
-    });
+    // const certificate = new acm.DnsValidatedCertificate(this, 'WebsiteCertificate', {
+    //   domainName: `${subdomain}.${domainName}`,
+    //   hostedZone: route53.HostedZone.fromLookup(this, 'HostedZone', { domainName }),
+    //   region: 'us-east-1', // CloudFront requires ACM certificates to be in the us-east-1 region
+    // });
 
     // Create CloudFront distribution
-    const distribution = new cloudfront.Distribution(this, 'WebsiteDistribution', {
-      defaultBehavior: { origin: new cloudfrontOrigins.S3Origin(websiteBucket) },
-      domainNames: [`${subdomain}.${domainName}`],
-      certificate: certificate,
-    });
+    // const distribution = new cloudfront.Distribution(this, 'WebsiteDistribution', {
+    //   defaultBehavior: { origin: new cloudfrontOrigins.S3Origin(websiteBucket) },
+    //   domainNames: [`${subdomain}.${domainName}`],
+    //   certificate: certificate,
+    // });
 
     // Create Route53 record
-    new route53.ARecord(this, 'WebsiteAliasRecord', {
-      zone: route53.HostedZone.fromLookup(this, 'HostedZone', { domainName }),
-      target: route53.RecordTarget.fromAlias(new targets.CloudFrontTarget(distribution)),
-      recordName: `${subdomain}.${domainName}`,
-    });
+    // new route53.ARecord(this, 'WebsiteAliasRecord', {
+    //   zone: route53.HostedZone.fromLookup(this, 'HostedZone', { domainName }),
+    //   target: route53.RecordTarget.fromAlias(new targets.CloudFrontTarget(distribution)),
+    //   recordName: `${subdomain}.${domainName}`,
+    // });
 
     // Deploy website assets to S3
     new s3deploy.BucketDeployment(this, 'WebsiteDeployment', {
       sources: [s3deploy.Source.asset('./My-Portfolio')],
       destinationBucket: websiteBucket,
-      distribution,
+      // distribution,
       distributionPaths: ['/*'],
     });
   }
