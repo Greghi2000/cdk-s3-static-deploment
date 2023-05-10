@@ -10,4 +10,4 @@ new StaticWebsiteStack(app, 'StaticWebsiteStack', {
     region: process.env.AWS_ACCOUNT_REGION,
   },
 });
-// app.synth();
+app.synth();
