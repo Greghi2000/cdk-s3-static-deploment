@@ -9,5 +9,6 @@ jobs:
             url: https://github.com/SeanGordon01/My-Portfolio.git
             path: ./website
       - run: |
+          ls
           cd website
           cat index-home.html
