@@ -4,11 +4,8 @@ jobs:
     docker:
       - image: 'contino/aws-cdk'
     steps:
-      - checkout: # - Responsable for cloning the repo
-          git:
-            url: https://github.com/SeanGordon01/My-Portfolio.git
-            path: ./website
       - run: |
+          git clone https://github.com/SeanGordon01/My-Portfolio.git
           ls
           cd website
           cat index-home.html
