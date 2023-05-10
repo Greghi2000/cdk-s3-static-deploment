@@ -48,7 +48,7 @@ export class StaticWebsiteStack extends cdk.Stack {
       sources: [s3deploy.Source.asset('./My-Portfolio')],
       destinationBucket: websiteBucket,
       // distribution,
-      distributionPaths: ['/*'],
+      // distributionPaths: ['/*'],
     });
   }
 }
