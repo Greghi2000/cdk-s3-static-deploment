@@ -14,4 +14,4 @@ jobs:
           npm install
           cdk synth
           cdk bootstrap
-          cdk deploy --verbose -y
+          cdk deploy --verbose --require-approval never
