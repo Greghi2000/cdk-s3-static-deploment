@@ -10,8 +10,9 @@ jobs:
           ls
           # cd My-Portfolio
           # cat index-home.html
-          cdk --version
-          npm install
-          cdk synth
-          cdk bootstrap
-          cdk deploy --verbose --require-approval never
+          aws s3 ls
+          # cdk --version
+          # npm install
+          # cdk synth
+          # cdk bootstrap
+          # cdk deploy --verbose --require-approval never
