@@ -14,4 +14,4 @@ jobs:
           npm install
           cdk synth
           cdk bootstrap
-          cdk deploy
+          cdk deploy -y
