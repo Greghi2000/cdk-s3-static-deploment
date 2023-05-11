@@ -13,4 +13,5 @@ jobs:
           cdk --version
           npm install
           cdk synth
+          cdk bootstrap
           cdk deploy
