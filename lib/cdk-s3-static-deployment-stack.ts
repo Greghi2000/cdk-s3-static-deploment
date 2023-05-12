@@ -18,7 +18,7 @@ export class StaticWebsiteStack extends cdk.Stack {
     // Create S3 bucket for website
     const websiteBucket = new s3.Bucket(this, 'WebsiteBucket', {
       websiteIndexDocument: 'index-home.html',
-      publicReadAccess: false,
+      publicReadAccess: true,
       removalPolicy: cdk.RemovalPolicy.DESTROY,
     });
 
