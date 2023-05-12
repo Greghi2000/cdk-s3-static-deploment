@@ -43,12 +43,12 @@ export class StaticWebsiteStack extends cdk.Stack {
     //   recordName: `${subdomain}.${domainName}`,
     // });
 
-    // // Deploy website assets to S3
-    // new s3deploy.BucketDeployment(this, 'WebsiteDeployment', {
-    //   sources: [s3deploy.Source.asset('./My-Portfolio')],
-    //   destinationBucket: websiteBucket,
-    //   // distribution,
-    //   // distributionPaths: ['/*'],
-    // });
+    // Deploy website assets to S3
+    new s3deploy.BucketDeployment(this, 'WebsiteDeployment', {
+      sources: [s3deploy.Source.asset('./My-Portfolio')],
+      destinationBucket: websiteBucket,
+      // distribution,
+      // distributionPaths: ['/*'],
+    });
   }
 }
