@@ -18,7 +18,7 @@ export class StaticWebsiteStack extends cdk.Stack {
     // Create S3 bucket for website
     const websiteBucket = new s3.Bucket(this, 'WebsiteBucket', {
       websiteIndexDocument: 'index-home.html',
-      publicReadAccess: true,
+      publicReadAccess: false,
       removalPolicy: cdk.RemovalPolicy.DESTROY,
     });
 
@@ -43,7 +43,7 @@ export class StaticWebsiteStack extends cdk.Stack {
     //   recordName: `${subdomain}.${domainName}`,
     // });
 
-    // Deploy website assets to S3
+    // // Deploy website assets to S3
     // new s3deploy.BucketDeployment(this, 'WebsiteDeployment', {
     //   sources: [s3deploy.Source.asset('./My-Portfolio')],
     //   destinationBucket: websiteBucket,
