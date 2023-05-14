@@ -22,11 +22,14 @@ export class StaticWebsiteStack extends cdk.Stack {
       removalPolicy: cdk.RemovalPolicy.DESTROY,
     });
 
+    // Look up the hosted zone by domain name
+    const hostedZone = route53.HostedZone.fromLookup(this, 'HostedZone', { domainName });
+
     // Create a certificate
-    const certificate = new acm.DnsValidatedCertificate(this, 'WebsiteCertificate', {
+    const certificate = new acm.Certificate(this, 'WebsiteCertificate', {
       domainName: `${subdomain}.${domainName}`,
-      hostedZone: route53.HostedZone.fromLookup(this, 'HostedZone', { domainName }),
-      region: 'us-east-1', // CloudFront requires ACM certificates to be in the us-east-1 region
+      validation: acm.CertificateValidation.fromDns(hostedZone),
+      // region: 'us-east-1', // CloudFront requires ACM certificates to be in the us-east-1 region
     });
 
     // Create CloudFront distribution
