@@ -8,10 +8,8 @@ jobs:
       - run: |
           git clone https://github.com/SeanGordon01/My-Portfolio.git
           ls
-          # cd My-Portfolio
-          # cat index-home.html
           cdk --version
           npm install
           cdk synth
-          # cdk bootstrap
+          cdk bootstrap
           cdk deploy --verbose --require-approval never
