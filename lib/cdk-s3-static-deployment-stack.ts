@@ -22,6 +22,9 @@ export class StaticWebsiteStack extends cdk.Stack {
       removalPolicy: cdk.RemovalPolicy.DESTROY,
     });
 
+    const originAccessIdentity = new cloudfront.OriginAccessIdentity(this, 'OriginAccessIdentity');
+    websiteBucket.grantRead(originAccessIdentity);
+
     // Look up the hosted zone by domain name
     const hostedZone = route53.HostedZone.fromLookup(this, 'HostedZone', { domainName });
 
@@ -33,7 +36,7 @@ export class StaticWebsiteStack extends cdk.Stack {
 
     // Create CloudFront distribution
     const distribution = new cloudfront.Distribution(this, 'WebsiteDistribution', {
-      defaultBehavior: { origin: new cloudfrontOrigins.S3Origin(websiteBucket) },
+      defaultBehavior: { origin: new cloudfrontOrigins.S3Origin(websiteBucket, {originAccessIdentity}) },
       // domainNames: [`${subdomain}.${domainName}`],
       domainNames: [`${domainName}`],
       certificate: certificate,
