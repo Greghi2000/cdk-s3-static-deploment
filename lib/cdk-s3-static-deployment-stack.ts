@@ -26,7 +26,7 @@ export class StaticWebsiteStack extends cdk.Stack {
     const hostedZone = route53.HostedZone.fromLookup(this, 'HostedZone', { domainName });
 
     // Assuming you have the ARN or name of the certificate
-    const certificateArn = 'arn:aws:acm:eu-west-2:011404371827:certificate/0280d4ab-4b00-4caa-a4fd-0996af58fef9';
+    const certificateArn = 'arn:aws:acm:us-east-1:011404371827:certificate/5239b95f-c338-4a4e-b2ac-8b31a788e2eb';
 
     // Fetch the certificate using the ARN
     const certificate = Certificate.fromCertificateArn(this, 'WebsiteCertificate', certificateArn);
