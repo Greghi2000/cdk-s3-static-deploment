@@ -43,14 +43,14 @@ export class StaticWebsiteStack extends cdk.Stack {
     });
 
     // Create Route53 record
-    new route53.ARecord(this, 'WebsiteAliasRecord', {
+    new route53.ARecord(this, 'SubdomainAliasRecord', {
       zone: hostedZone,
       target: route53.RecordTarget.fromAlias(new targets.CloudFrontTarget(distribution)),
       recordName: `${subdomain}.${domainName}`,
     });
 
     // Create Route53 record
-    new route53.ARecord(this, 'WebsiteAliasRecord', {
+    new route53.ARecord(this, 'DomainAliasRecord', {
       zone: hostedZone,
       target: route53.RecordTarget.fromAlias(new targets.CloudFrontTarget(distribution)),
       recordName: `${domainName}`,
