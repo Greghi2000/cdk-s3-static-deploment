@@ -38,7 +38,7 @@ export class StaticWebsiteStack extends cdk.Stack {
     const distribution = new cloudfront.Distribution(this, 'WebsiteDistribution', {
       defaultBehavior: { origin: new cloudfrontOrigins.S3Origin(websiteBucket, {originAccessIdentity}) },
       // domainNames: [`${subdomain}.${domainName}`],
-      domainNames: [`${domainName}`],
+      domainNames: [`${domainName}`, `${subdomain}.${domainName}`],
       certificate: certificate,
     });
 
@@ -47,6 +47,13 @@ export class StaticWebsiteStack extends cdk.Stack {
       zone: hostedZone,
       target: route53.RecordTarget.fromAlias(new targets.CloudFrontTarget(distribution)),
       recordName: `${subdomain}.${domainName}`,
+    });
+
+    // Create Route53 record
+    new route53.ARecord(this, 'WebsiteAliasRecord', {
+      zone: hostedZone,
+      target: route53.RecordTarget.fromAlias(new targets.CloudFrontTarget(distribution)),
+      recordName: `${domainName}`,
     });
 
     // Deploy website assets to S3
