@@ -4,8 +4,8 @@ import * as cloudfront from 'aws-cdk-lib/aws-cloudfront';
 import * as cloudfrontOrigins from 'aws-cdk-lib/aws-cloudfront-origins';
 import * as route53 from 'aws-cdk-lib/aws-route53';
 import * as targets from 'aws-cdk-lib/aws-route53-targets';
-import * as acm from 'aws-cdk-lib/aws-certificatemanager';
 import * as s3deploy from 'aws-cdk-lib/aws-s3-deployment';
+import { Certificate } from 'aws-cdk-lib/aws-certificatemanager';
 
 export class StaticWebsiteStack extends cdk.Stack {
   constructor(scope: cdk.App, id: string, props?: cdk.StackProps) {
@@ -25,12 +25,11 @@ export class StaticWebsiteStack extends cdk.Stack {
     // Look up the hosted zone by domain name
     const hostedZone = route53.HostedZone.fromLookup(this, 'HostedZone', { domainName });
 
-    // Create a certificate
-    const certificate = new acm.Certificate(this, 'WebsiteCertificate', {
-      domainName: `${subdomain}.${domainName}`,
-      validation: acm.CertificateValidation.fromDns(hostedZone),
-      // region: 'us-east-1', // CloudFront requires ACM certificates to be in the us-east-1 region
-    });
+    // Assuming you have the ARN or name of the certificate
+    const certificateArn = 'your-certificate-arn';
+
+  // Fetch the certificate using the ARN
+  const certificate = Certificate.fromCertificateArn(this, 'WebsiteCertificate', certificateArn);
 
     // Create CloudFront distribution
     const distribution = new cloudfront.Distribution(this, 'WebsiteDistribution', {
