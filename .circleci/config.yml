@@ -10,6 +10,6 @@ jobs:
           ls
           cdk --version
           npm install
-          # cdk synth
-          cdk bootstrap --y
-          # cdk deploy --verbose --require-approval never
+          cdk synth
+          # cdk bootstrap --y
+          cdk deploy --verbose --require-approval never
