@@ -34,7 +34,8 @@ export class StaticWebsiteStack extends cdk.Stack {
     // Create CloudFront distribution
     const distribution = new cloudfront.Distribution(this, 'WebsiteDistribution', {
       defaultBehavior: { origin: new cloudfrontOrigins.S3Origin(websiteBucket) },
-      domainNames: [`${subdomain}.${domainName}`],
+      // domainNames: [`${subdomain}.${domainName}`],
+      domainNames: [`${domainName}`],
       certificate: certificate,
     });
 
