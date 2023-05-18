@@ -8,10 +8,10 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 
 const app = new cdk.App();
-new StaticWebsiteStack(app, 'StaticWebsiteStack2', {
+new StaticWebsiteStack(app, 'StaticWebsiteStack', {
   env: {
     account: process.env.AWS_ACCOUNT_NUMBER,
-    region: process.env.AWS_ACCOUNT_REGION,
+    region: 'us-east-1' //process.env.AWS_ACCOUNT_REGION,
   },
 });
 app.synth();

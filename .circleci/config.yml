@@ -9,6 +9,7 @@ jobs:
           git clone https://github.com/SeanGordon01/My-Portfolio.git
           ls
           cdk --version
+          export AWS_DEFAULT_REGION=us-east-1
           npm install
           cdk synth
           # cdk bootstrap --y
