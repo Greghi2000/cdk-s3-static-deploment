@@ -50,11 +50,11 @@ export class StaticWebsiteStack extends cdk.Stack {
     });
 
     // Create Route53 record
-    new route53.ARecord(this, 'DomainAliasRecord', {
-      zone: hostedZone,
-      target: route53.RecordTarget.fromAlias(new targets.CloudFrontTarget(distribution)),
-      recordName: `${domainName}`,
-    });
+    // new route53.ARecord(this, 'DomainAliasRecord', {
+    //   zone: hostedZone,
+    //   target: route53.RecordTarget.fromAlias(new targets.CloudFrontTarget(distribution)),
+    //   recordName: `${domainName}`,
+    // });
 
     // Deploy website assets to S3
     new s3deploy.BucketDeployment(this, 'WebsiteDeployment', {
