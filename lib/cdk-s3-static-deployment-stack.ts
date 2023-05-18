@@ -17,8 +17,9 @@ export class StaticWebsiteStack extends cdk.Stack {
 
     // Create S3 bucket for website
     const websiteBucket = new s3.Bucket(this, 'WebsiteBucket', {
-      websiteIndexDocument: 'index-home.html',
-      publicReadAccess: false,
+      // websiteIndexDocument: 'index-home.html',
+      // publicReadAccess: false,
+      accessControl: s3.BucketAccessControl.PRIVATE,
       removalPolicy: cdk.RemovalPolicy.DESTROY,
     });
 
@@ -38,16 +39,17 @@ export class StaticWebsiteStack extends cdk.Stack {
     const distribution = new cloudfront.Distribution(this, 'WebsiteDistribution', {
       defaultBehavior: { origin: new cloudfrontOrigins.S3Origin(websiteBucket, {originAccessIdentity}) },
       // domainNames: [`${subdomain}.${domainName}`],
-      domainNames: [`${domainName}`, `${subdomain}.${domainName}`],
+      // domainNames: [`${domainName}`, `${subdomain}.${domainName}`],
+      defaultRootObject: 'index-home.html',
       certificate: certificate,
     });
 
-    // Create Route53 record
-    new route53.ARecord(this, 'SubdomainAliasRecord', {
-      zone: hostedZone,
-      target: route53.RecordTarget.fromAlias(new targets.CloudFrontTarget(distribution)),
-      recordName: `${subdomain}.${domainName}`,
-    });
+    // // Create Route53 record
+    // new route53.ARecord(this, 'SubdomainAliasRecord', {
+    //   zone: hostedZone,
+    //   target: route53.RecordTarget.fromAlias(new targets.CloudFrontTarget(distribution)),
+    //   recordName: `${subdomain}.${domainName}`,
+    // });
 
     // Create Route53 record
     // new route53.ARecord(this, 'DomainAliasRecord', {
@@ -60,8 +62,8 @@ export class StaticWebsiteStack extends cdk.Stack {
     new s3deploy.BucketDeployment(this, 'WebsiteDeployment', {
       sources: [s3deploy.Source.asset('./My-Portfolio')],
       destinationBucket: websiteBucket,
-      distribution,
-      distributionPaths: ['/*'],
+      // distribution,
+      // distributionPaths: ['/*'],
     });
   }
 }
