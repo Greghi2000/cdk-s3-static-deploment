@@ -11,6 +11,6 @@ jobs:
           cdk --version
           export AWS_DEFAULT_REGION=us-east-1
           npm install
-          cdk synth
-          # cdk bootstrap --y
-          cdk deploy --verbose --require-approval never
+          # cdk synth
+          cdk bootstrap --y
+          # cdk deploy --verbose --require-approval never
