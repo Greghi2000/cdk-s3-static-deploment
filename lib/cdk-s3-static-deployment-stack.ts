@@ -41,7 +41,7 @@ export class StaticWebsiteStack extends cdk.Stack {
       // domainNames: [`${subdomain}.${domainName}`],
       // domainNames: [`${domainName}`, `${subdomain}.${domainName}`],
       defaultRootObject: 'index-home.html',
-      certificate: certificate,
+      // certificate: certificate,
     });
 
     // // Create Route53 record
